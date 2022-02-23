@@ -1,5 +1,5 @@
 import { registerAs } from '@nestjs/config';
-import { ENTITIES } from '../model';
+import { ENTITIES } from '../models';
 import { MIGRATIONS } from '../migrations';
 
 export default registerAs('database', () => {
