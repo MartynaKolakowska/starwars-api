@@ -16,17 +16,28 @@ export class CharactersRepository
 {
   async createEntity(createCharacterDto: CreateCharacterDto) {
     try {
-      const character = await this.create(createCharacterDto);
-      await this.save(character);
-      return character;
+      const { episodeIds, ...dto } = createCharacterDto;
+      const character = await this.create({
+        ...dto,
+        episodes: episodeIds.map((id) => ({ id })),
+      });
+      return this.save(character);
     } catch (err) {
       throw new InternalServerErrorException(err);
     }
   }
 
   async updateEntity(id: number, updateCharacterDto: UpdateCharacterDto) {
-    //TODO:
-    return this.save(updateCharacterDto);
+    const { episodeIds, ...dto } = updateCharacterDto;
+    const character = await this.findOne(id);
+    if (!character) {
+      throw new NotFoundException();
+    }
+    return this.save({
+      ...character,
+      episodes: episodeIds.map((id) => ({ id })),
+      ...dto,
+    });
   }
 
   async findOneEntity(id: number) {

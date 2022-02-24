@@ -1,4 +1,4 @@
-import { Entity, Column, ManyToMany, OneToMany } from 'typeorm';
+import { Entity, Column, ManyToMany, OneToMany, ManyToOne } from 'typeorm';
 import { Base } from './base.entity';
 import { Episode } from './episode.entity';
 import { Planet } from './planet.entity';
@@ -44,9 +44,14 @@ export class Character extends Base {
   })
   episodes: Episode[];
 
-  @OneToMany(() => Planet, (planet) => planet.characters, {
+  @ManyToOne(() => Planet, (planet) => planet.characters, {
     onUpdate: 'CASCADE',
     nullable: true,
   })
   planet: Planet;
+
+  @Column({
+    nullable: true,
+  })
+  planetId: number;
 }

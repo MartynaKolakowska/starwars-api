@@ -39,6 +39,6 @@ export class Episode extends Base {
   characters: Character[];
 
   @ManyToMany(() => Planet, (planets) => planets.episodes)
-  @JoinColumn()
+  @JoinTable()
   planets: Planet[];
 }

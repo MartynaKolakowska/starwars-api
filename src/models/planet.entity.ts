@@ -1,5 +1,5 @@
 import { Base } from './base.entity';
-import { Column, Entity, ManyToMany, ManyToOne } from 'typeorm';
+import { Column, Entity, ManyToMany, ManyToOne, OneToMany } from 'typeorm';
 import { Character } from './character.entity';
 import { Episode } from './episode.entity';
 
@@ -27,7 +27,7 @@ export class Planet extends Base {
   })
   description: string;
 
-  @ManyToOne(() => Character, (characters) => characters.planet)
+  @OneToMany(() => Character, (characters) => characters.planet)
   characters: Character[];
 
   @ManyToMany(() => Episode, (episodes) => episodes.planets)

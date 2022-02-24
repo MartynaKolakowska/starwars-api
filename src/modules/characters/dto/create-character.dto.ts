@@ -6,6 +6,9 @@ import {
   Max,
   MaxLength,
   IsInt,
+  IsNumber,
+  IsNumberString,
+  IsArray,
 } from 'class-validator';
 import {
   CharacterGender,
@@ -15,6 +18,8 @@ import {
   SHORT_STRING_LENGTH,
   MID_STRING_LENGTH,
 } from '../../../utils/const/const';
+import { Type } from 'class-transformer';
+import { Planet } from 'src/models/planet.entity';
 
 export class CreateCharacterDto {
   @MaxLength(MID_STRING_LENGTH)
@@ -38,11 +43,16 @@ export class CreateCharacterDto {
   @Min(MIN_HEIGHT_IN_CM)
   @Max(MAX_HEIGHT_IN_CM)
   @IsOptional()
+  @Type(() => Number)
   height: number;
 
-  //   @ManyToMany(() => Episode, (episode) => episode.characters)
-  //   episodes: Episode[];
+  @Type(() => Number)
+  @IsArray()
+  @IsNumber({}, { each: true })
+  episodeIds: number[];
 
-  //   @OneToMany(() => Planet, (planet) => planet.characters)
-  //   planet: Planet;
+  @IsInt()
+  @IsOptional()
+  @Type(() => Number)
+  planetId: number;
 }
