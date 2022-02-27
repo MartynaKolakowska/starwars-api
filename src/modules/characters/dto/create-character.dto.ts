@@ -19,26 +19,44 @@ import {
   MID_STRING_LENGTH,
 } from '../../../utils/const/const';
 import { Type } from 'class-transformer';
-import { Planet } from 'src/models/planet.entity';
+import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateCharacterDto {
+  @ApiProperty()
   @MaxLength(MID_STRING_LENGTH)
   @IsNotEmpty()
   name: string;
 
+  @ApiProperty({
+    required: false,
+    description: 'Description',
+  })
   @MaxLength(LONG_STRING_LENGHT)
   @IsOptional()
   description: string;
 
+  @ApiProperty({
+    description: 'Gender',
+    enum: CharacterGender,
+  })
   @MaxLength(SHORT_STRING_LENGTH)
   @IsEnum(CharacterGender)
   @IsNotEmpty()
   gender: string;
 
+  @ApiProperty({
+    required: false,
+    description: 'Birth Year',
+    example: '33BBY',
+  })
   @MaxLength(SHORT_STRING_LENGTH)
-  @IsOptional()
+  @IsOptional({})
   birthYear: string;
 
+  @ApiProperty({
+    required: false,
+    description: 'Height of the character in cm.',
+  })
   @IsInt()
   @Min(MIN_HEIGHT_IN_CM)
   @Max(MAX_HEIGHT_IN_CM)
@@ -46,11 +64,19 @@ export class CreateCharacterDto {
   @Type(() => Number)
   height: number;
 
+  @ApiProperty({
+    required: false,
+    description: 'Array of episode IDs',
+  })
   @Type(() => Number)
   @IsArray()
   @IsNumber({}, { each: true })
   episodeIds: number[];
 
+  @ApiProperty({
+    required: false,
+    description: 'Planet ID',
+  })
   @IsInt()
   @IsOptional()
   @Type(() => Number)

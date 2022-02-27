@@ -24,7 +24,6 @@ export class SeederService implements OnApplicationBootstrap {
   async onApplicationBootstrap() {
     const seedDatabase = this.configService.get('api.seedDatabase');
     if (seedDatabase) {
-      console.log('seed');
       await this.seedPlanets();
       await this.seedCharacters();
       await this.seedEpisodes();

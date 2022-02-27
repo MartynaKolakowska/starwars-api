@@ -2,6 +2,7 @@ import { Base } from './base.entity';
 import { Column, Entity, ManyToMany, ManyToOne, OneToMany } from 'typeorm';
 import { Character } from './character.entity';
 import { Episode } from './episode.entity';
+import { ApiHideProperty } from '@nestjs/swagger';
 
 @Entity()
 export class Planet extends Base {

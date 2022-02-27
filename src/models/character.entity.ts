@@ -7,6 +7,7 @@ import {
   LONG_STRING_LENGHT,
   SHORT_STRING_LENGTH,
 } from '../utils/const/const';
+import { ApiHideProperty } from '@nestjs/swagger';
 
 @Entity()
 export class Character extends Base {
@@ -50,6 +51,7 @@ export class Character extends Base {
   })
   planet: Planet;
 
+  @ApiHideProperty()
   @Column({
     nullable: true,
   })

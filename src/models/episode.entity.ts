@@ -1,3 +1,4 @@
+import { ApiHideProperty } from '@nestjs/swagger';
 import { Entity, Column, ManyToMany, JoinColumn, JoinTable } from 'typeorm';
 import { Base } from './base.entity';
 import { Character } from './character.entity';

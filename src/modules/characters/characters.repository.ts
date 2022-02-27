@@ -8,6 +8,7 @@ import {
   NotFoundException,
   InternalServerErrorException,
 } from '@nestjs/common';
+import { plainToClass } from 'class-transformer';
 
 @EntityRepository(Character)
 export class CharactersRepository
@@ -33,11 +34,12 @@ export class CharactersRepository
     if (!character) {
       throw new NotFoundException();
     }
-    return this.save({
+    const updated = this.save({
       ...character,
       episodes: episodeIds.map((id) => ({ id })),
       ...dto,
     });
+    return plainToClass(Character, updated);
   }
 
   async findOneEntity(id: number) {
