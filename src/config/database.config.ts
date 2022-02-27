@@ -13,6 +13,7 @@ export default registerAs('database', () => {
     synchronize: process.env.DB_SYNCHRONIZE === 'true' ? true : false,
     entityPrefix: 'starwars_',
     migrations: MIGRATIONS,
+    migrationsRun: process.env.DB_MIGRATION_RUN,
     cli: {
       migrationsDir: 'src/migrations',
     },
