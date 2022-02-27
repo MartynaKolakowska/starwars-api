@@ -43,7 +43,7 @@ export class CharactersController {
   @Get()
   @ApiOkResponse({ description: 'Get list of characters' })
   findAll(
-    @Query() paginationParams: PaginationParamsDto,
+    @Query() paginationParams?: PaginationParamsDto,
   ): Promise<GetEntitiesResponse<Character>> {
     if (paginationParams) {
       return this.charactersService.findAllWithPagination(paginationParams);
